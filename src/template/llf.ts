@@ -181,62 +181,52 @@ const incidentCategories = [
   // { id: "natural", label: "Natuurlijk incident" },
   // { id: "urban", label: "Incident in bebouwing" },
   // { id: "chemical", label: "Incident met gevaarlijke stoffen" },
-  // { id: "infra", label: "Incident in vitale infrastructuur" },
+  // { id: "vitaal", label: "Incident in vitale infrastructuur" },
   // { id: "transport", label: "Transportincident" },
   // { id: "health", label: "Gezondheidsincident" },
   // { id: "social", label: "Sociaal-maatschappelijk incident" },
   // { id: "technical", label: "Technologisch/menselijk falen" },
   // { id: "attack", label: "Opzettelijk incident" },
 
-  { id: "infectieziekten", label: "Infectieziekten" },
-  { id: "natuurrampen", label: "Klimaat- en natuurrampen" },
-  { id: "infra", label: "Bedreiging vitale infrastructuur" },
-  { id: "cyber", label: "Cyberdreigingen" },
-  { id: "ongeval", label: "Zware ongevallen" },
-  { id: "terrorisme", label: "Extremisme en terrorisme" },
-  { id: "oov", label: "Overige OOV" },
+  { id: "gezondheid", label: "Gezondheid" },
+  { id: "natuur", label: "Natuur en klimaat" },
+  { id: "vitaal", label: "Vitale voorzieningen" },
+  { id: "fysiek", label: "Fysieke leefomgeving en milieu" },
+  { id: "maatschappij", label: "Maatschappij" },
 ];
 
 export type IncidentType =
   | "aardbeving"
   | "afval"
-  | "bomaanslag"
+  | "afstand"
   | "brand"
-  | "brandstichting"
-  | "buien"
-  | "cbrn"
-  | "cybercrime"
+  | "chronisch"
+  | "criminaliteit"
+  | "dierziekte"
   | "drinkwater"
   | "elektriciteit"
-  | "epidemie"
-  | "explosief"
+  | "evenement"
+  | "explosie"
+  | "stof"
   | "gas"
-  | "giftig"
-  | "hittegolf"
   | "ict"
+  | "infectieziekte"
   | "instorting"
-  | "koudegolf"
-  | "kust"
+  | "overstroming"
   | "luchtvaart"
   | "natuurbrand"
-  | "nucleair"
   | "onrust"
-  | "paniek"
+  | "polarisatie"
   | "riool"
-  | "rivier"
-  | "sabotage"
-  | "scheepvaart"
   | "spoor"
-  | "storm"
-  | "tunnel"
-  | "vandalisme"
-  | "vloedgolf"
+  | "verkeer"
   | "voedsel"
   | "voo"
   | "waterincident"
+  | "wateroverlast"
   | "wegverkeer"
-  | "winter"
-  | "ziekte";
+  | "plaag"
+  | "zorgcontinuiteit";
 
 export const incidentTypes: Array<{
   id: IncidentType;
@@ -244,209 +234,169 @@ export const incidentTypes: Array<{
   show: string[];
 }> = [
   {
-    id: "ziekte" as IncidentType,
-    label: "Plaag, dier- of plantziekte",
-    show: ["incidentCategory=infectieziekten"],
+    id: "plaag" as IncidentType,
+    label: "Plaag en plantenziekte",
+    show: ["incidentCategory=natuur"],
   },
   {
-    id: "epidemie" as IncidentType,
-    label: "Epidemie / Pandemie",
-    show: ["incidentCategory=infectieziekten"],
+    id: "dierziekte" as IncidentType,
+    label: "Dierziekte",
+    show: ["incidentCategory=natuur"],
   },
   {
-    id: "winter" as IncidentType,
-    label: "Extreem weer - hagel/sneeuwval/ijzel",
-    show: ["incidentCategory=natuurrampen"],
+    id: "zorgcontinuiteit" as IncidentType,
+    label: "Zorgcontinuïteit",
+    show: ["incidentCategory=gezondheid"],
   },
   {
-    id: "buien" as IncidentType,
-    label: "Extreem weer - hevige buien/onweer",
-    show: ["incidentCategory=natuurrampen"],
+    id: "infectieziekte" as IncidentType,
+    label: "Infectieziekte",
+    show: ["incidentCategory=gezondheid"],
   },
   {
-    id: "hittegolf" as IncidentType,
-    label: "Extreem weer - hittegolf/droogte",
-    show: ["incidentCategory=natuurrampen"],
-  },
-  {
-    id: "koudegolf" as IncidentType,
-    label: "Extreem weer - koudegolf",
-    show: ["incidentCategory=natuurrampen"],
-  },
-  {
-    id: "storm" as IncidentType,
-    label: "Extreem weer - storm/tornado",
-    show: ["incidentCategory=natuurrampen"],
+    id: "chronisch" as IncidentType,
+    label: "Chronische blootstelling",
+    show: ["incidentCategory=gezondheid"],
   },
   {
     id: "aardbeving" as IncidentType,
     label: "Aardbeving",
-    show: ["incidentCategory=natuurrampen"],
+    show: ["incidentCategory=natuur"],
   },
   {
     id: "natuurbrand" as IncidentType,
     label: "Natuurbrand",
-    show: ["incidentCategory=natuurrampen"],
+    show: ["incidentCategory=natuur"],
   },
   {
-    id: "kust" as IncidentType,
-    label: "Overstroming - kust",
-    show: ["incidentCategory=natuurrampen"],
-  },
-  {
-    id: "rivier" as IncidentType,
-    label: "Overstroming - rivier",
-    show: ["incidentCategory=natuurrampen"],
-  },
-  {
-    id: "vloedgolf" as IncidentType,
-    label: "Overstroming - vloedgolf",
-    show: ["incidentCategory=natuurrampen"],
+    id: "overstroming" as IncidentType,
+    label: "Overstroming",
+    show: ["incidentCategory=natuur"],
   },
   {
     id: "drinkwater" as IncidentType,
-    label: "Storing - drinkwater",
-    show: ["incidentCategory=infra"],
+    label: "Verstoring drinkwatervoorziening",
+    show: ["incidentCategory=vitaal"],
   },
   {
     id: "elektriciteit" as IncidentType,
-    label: "Storing - elektriciteitsvoorziening",
-    show: ["incidentCategory=infra"],
+    label: "Verstoring elektriciteitsvoorziening",
+    show: ["incidentCategory=vitaal"],
   },
   {
     id: "gas" as IncidentType,
-    label: "Storing - gasvoorziening",
-    show: ["incidentCategory=infra"],
+    label: "Verstoring gasvoorziening",
+    show: ["incidentCategory=vitaal"],
+  },
+  {
+    id: "warmte" as IncidentType,
+    label: "Verstoring warmtedistributie",
+    show: ["incidentCategory=vitaal"],
   },
   {
     id: "riool" as IncidentType,
-    label: "Storing - riool-/afvalwaterzuivering",
-    show: ["incidentCategory=infra"],
+    label: "Verstoring rioolwaterzuiveringsvoorziening",
+    show: ["incidentCategory=vitaal"],
   },
   {
     id: "voedsel" as IncidentType,
-    label: "Storing - voedselvoorziening",
-    show: ["incidentCategory=infra"],
-  },
-  {
-    id: "cybercrime" as IncidentType,
-    label: "Cybercrime",
-    show: ["incidentCategory=cyber"],
+    label: "Verstoring afhandeling  voedselvoorziening",
+    show: ["incidentCategory=vitaal"],
   },
   {
     id: "ict" as IncidentType,
-    label: "Storing - telecommunicatie/ICT",
-    show: ["incidentCategory=infra"],
+    label: "Verstoring data en telecommunicatie",
+    show: ["incidentCategory=vitaal"],
   },
   {
     id: "waterincident" as IncidentType,
     label: "Incident op of onder water",
-    show: ["incidentCategory=ongeval"],
+    show: ["incidentCategory=fysiek"],
   },
   {
-    id: "tunnel" as IncidentType,
-    label: "Incident in tunnel/ondergrondse infra",
-    show: ["incidentCategory=ongeval"],
+    id: "wateroverlast" as IncidentType,
+    label: "Wateroverlast gebouwde omgeving",
+    show: ["incidentCategory=fysiek"],
+  },
+  {
+    id: "explosie" as IncidentType,
+    label: "Explosie",
+    show: ["incidentCategory=fysiek"],
   },
   {
     id: "luchtvaart" as IncidentType,
-    label: "Transportincident - luchtvaart",
-    show: ["incidentCategory=ongeval"],
-  },
-  {
-    id: "scheepvaart" as IncidentType,
-    label: "Transportincident - scheepvaart",
-    show: ["incidentCategory=ongeval"],
+    label: "Luchtvervoerincident",
+    show: ["incidentCategory=fysiek"],
   },
   {
     id: "spoor" as IncidentType,
-    label: "Transportincident - spoor",
-    show: ["incidentCategory=ongeval"],
+    label: "Incident op het spoor",
+    show: ["incidentCategory=fysiek"],
+  },
+  {
+    id: "pijp" as IncidentType,
+    label: "Ongeval pijptransport",
+    show: ["incidentCategory=fysiek"],
+  },
+  {
+    id: "verkeer" as IncidentType,
+    label: "Verstoring afhandeling verkeer en vervoer",
+    show: ["incidentCategory=vitaal"],
   },
   {
     id: "wegverkeer" as IncidentType,
-    label: "Transportincident - wegverkeer",
-    show: ["incidentCategory=ongeval"],
+    label: "Incident op de weg",
+    show: ["incidentCategory=fysiek"],
   },
   {
-    id: "explosief" as IncidentType,
-    label: "Ongeval brandbare/explosieve stoffen",
-    show: ["incidentCategory=ongeval"],
-  },
-  {
-    id: "giftig" as IncidentType,
-    label: "Ongeval giftige stoffen",
-    show: ["incidentCategory=ongeval"],
-  },
-  {
-    id: "nucleair" as IncidentType,
-    label: "Ongeval radiologische/nucleaire stoffen",
-    show: ["incidentCategory=ongeval"],
-  },
-  {
-    id: "bomaanslag" as IncidentType,
-    label: "Bomaanslag",
-    show: ["incidentCategory=terrorisme"],
-  },
-  {
-    id: "brandstichting" as IncidentType,
-    label: "Brandstichting",
-    show: ["incidentCategory=terrorisme"],
+    id: "stof" as IncidentType,
+    label: "Incident met gevaarlijke stof",
+    show: ["incidentCategory=fysiek"],
   },
   {
     id: "geweld" as IncidentType,
-    label: "Extreem geweld",
-    show: ["incidentCategory=terrorisme"],
+    label: "Geweld in de openbare ruimte",
+    show: ["incidentCategory=maatschappij"],
   },
   {
-    id: "cbrn" as IncidentType,
-    label: "CBRN-aanslag",
-    show: ["incidentCategory=terrorisme"],
+    id: "evenement" as IncidentType,
+    label: "Verstoring publieksveiligheid evenement",
+    show: ["incidentCategory=maatschappij"],
   },
   {
-    id: "sabotage" as IncidentType,
-    label: "Sabotage",
-    show: ["incidentCategory=terrorisme"],
+    id: "polarisatie" as IncidentType,
+    label: "Polarisatie",
+    show: ["incidentCategory=maatschappij"],
+  },
+  {
+    id: "criminaliteit" as IncidentType,
+    label: "Criminaliteit",
+    show: ["incidentCategory=maatschappij"],
+  },
+  {
+    id: "afstand" as IncidentType,
+    label: "Ramp op afstand",
+    show: ["incidentCategory=maatschappij"],
   },
   {
     id: "instorting" as IncidentType,
-    label: "Instorting gebouw/kunstwerk",
-    show: ["incidentCategory=oov"],
+    label: "Instorting of schade gebouw",
+    show: ["incidentCategory=fysiek"],
   },
   {
     id: "brand" as IncidentType,
-    label: "Brand in gebouw/infrastructuur",
-    show: ["incidentCategory=oov"],
-  },
-  {
-    id: "paniek" as IncidentType,
-    label: "Paniek in menigte",
-    show: ["incidentCategory=oov"],
-  },
-  {
-    id: "vandalisme" as IncidentType,
-    label: "Vandalisme",
-    show: ["incidentCategory=oov"],
+    label: "Brand gebouwde omgeving",
+    show: ["incidentCategory=fysiek"],
   },
   {
     id: "voo" as IncidentType,
-    label: "Verstoring openbare orde",
-    show: ["incidentCategory=oov"],
-  },
-  {
-    id: "volks­gezondheid" as IncidentType,
-    label: "Verstoring volks­gezondheid",
-    show: ["incidentCategory=oov"],
-  },
-  {
-    id: "onrust" as IncidentType,
-    label: "Sociale onrust",
-    show: ["incidentCategory=oov"],
+    label: "Openbare orde verstoringen",
+    show: ["incidentCategory=maatschappij"],
   },
   {
     id: "afval" as IncidentType,
     label: "Verstoring afvalverwerking",
-    show: ["incidentCategory=infra"],
+    show: ["incidentCategory=vitaal"],
   },
 
   // { id: "flooding", label: "Overstroming", show: ["incidentCategory=natural"] },
@@ -486,32 +436,32 @@ export const incidentTypes: Array<{
   // {
   //   id: "energy_supply",
   //   label: "Energievoorziening",
-  //   show: ["incidentCategory=infra"],
+  //   show: ["incidentCategory=vitaal"],
   // },
   // {
   //   id: "water_supply",
   //   label: "Drinkwatervoorziening",
-  //   show: ["incidentCategory=infra"],
+  //   show: ["incidentCategory=vitaal"],
   // },
   // {
   //   id: "sewage",
   //   label: "Riool-/afvalwaterzuivering",
-  //   show: ["incidentCategory=infra"],
+  //   show: ["incidentCategory=vitaal"],
   // },
   // {
   //   id: "ict",
   //   label: "Telecommunicatie/ICT",
-  //   show: ["incidentCategory=infra"],
+  //   show: ["incidentCategory=vitaal"],
   // },
   // {
   //   id: "waste_disposal",
   //   label: "Afvalverwerking",
-  //   show: ["incidentCategory=infra"],
+  //   show: ["incidentCategory=vitaal"],
   // },
   // {
   //   id: "food_supply",
   //   label: "Voedselvoorziening",
-  //   show: ["incidentCategory=infra"],
+  //   show: ["incidentCategory=vitaal"],
   // },
   // {
   //   id: "air",
@@ -650,7 +600,7 @@ export const incidentTypes: Array<{
   // },
 
   // {
-  //   id: "infra",
+  //   id: "vitaal",
   //   label: "Instorting vitale infrastructuur",
   //   show: ["incidentCategory=technical"],
   // },

@@ -223,6 +223,7 @@ export type IncidentType =
   | "verkeer"
   | "voedsel"
   | "voo"
+  | "warmte"
   | "waterincident"
   | "wateroverlast"
   | "wegverkeer"
